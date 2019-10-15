@@ -1,0 +1,251 @@
+prgmX
+Goto 8
+Lbl 8
+500→S
+15→L
+50→T
+Goto A
+Lbl A
+0→X
+Menu("BLACK JACK","NEW GAME",Q,"CONTINUE",P,"SETTINGS",1,"RESET",9,"QUIT",H)
+Lbl 9
+prgmTRIPPY
+Goto 8
+Lbl 1
+ClrHome
+Menu("SETTINGS","STARTING MONEY",2,"BUST PENALTY",3,"DIFICULTY",4,"MAIN MENU",A)
+Lbl 2
+ClrHome
+Disp "CURENT STMONEY",S
+Input "NEW ST MNY=",S
+
+Goto 1
+Lbl 3
+ClrHome
+Disp "CURENT PENALTY",T
+Input "NEW PENALTY=",T
+
+Goto 1
+Lbl 4
+Menu("DIFFICULTY","NORMAL",5,"HARD",6,"IMPOSIBLE",7)
+Lbl 5
+500→S
+15→L
+0→Z
+Goto 1
+Lbl 6
+100→S
+18→L
+0→Z
+Goto 1
+Lbl 7
+10→S
+20→L
+0→Z
+Goto 1
+Lbl P
+0→X
+Goto B
+Lbl H
+ClrHome
+Stop
+Lbl Q
+0→X
+S→Z
+1→R
+While R<52
+1→L₂(R)
+R+1→R
+End
+
+Goto B
+Lbl B
+If Z≤0
+Then
+Goto O
+0→X
+Goto J
+Else
+Goto J
+Lbl J
+Menu("PLAY","HIT",D,"STAY",10,"CARD COUNT",F,"MONEY LEFT",G,"QUIT",H)
+Goto A
+Lbl G
+ClrHome
+Output(4,5,"-MONEY-"
+Output(5,1,Z)
+Pause 
+ClrHome
+Goto B
+Lbl F
+ClrHome
+Output(4,5,"-CARDS-")
+Output(5,8,X)
+Pause 
+ClrHome
+Goto J
+Lbl D
+ClrHome
+0→N
+randInt(1,52)→R
+While L₂(R)=0 and N<52
+randInt(1,52)→R
+N+1→N
+End
+If N>52
+Then
+Goto N
+Else
+L₂(R)-1→L₂(R)
+L₁(R)→C
+If C=11
+Then
+Disp "ACE!"
+Input "1 OR 11?",C
+End
+C+X→X
+If X>21
+Then
+While getKey=0
+Output(4,7,"     ")
+Output(4,7,"     ")
+Output(4,7,"     ")
+Output(4,7,"     ")
+Output(4,7,"     ")
+Output(4,7,"BUST!")
+Output(4,7,"BUST!")
+Output(4,7,"BUST!")
+Output(4,7,"BUST!")
+Output(4,7,"BUST!")
+End
+0→X
+Z-T→Z
+ClrHome
+Goto B
+Lbl O
+Menu("YOURE BROKE","TRY AGAIN",Q,"QUIT",H)
+Lbl U
+ClrHome
+Goto A
+Else
+If X≤21
+Then
+Output(4,6,"CARDS")
+Output(5,8,X)
+Pause 
+ClrHome
+Goto J
+Lbl 10
+0→W
+randInt(L,21)→Y
+0→I
+Lbl 11
+ClrHome
+Output(6,1,"----------------")
+Output(7,1,"*BET")
+Output(7,6,W)
+Output(8,1,"MNY=")
+Output(8,5,Z)
+If I=0
+Then
+Output(6,1,"                ")
+Output(7,1,"                ")
+Output(7,1,"----------------")
+Goto E
+Else
+If I=1
+Then
+Output(7,1,"                ")
+Output(7,5,">")
+Output(7,1,"*BET")
+Output(7,6,W)
+Goto E
+Else
+If I=2
+Then
+Output(7,1,"                ")
+Output(7,5,"<")
+Output(7,1,"*BET")
+Output(7,6,W)
+Goto E
+Else
+Lbl E
+Input "BET=",W
+If W≤0
+Then
+1→I
+ClrHome
+Goto 11
+Else
+If W>Z
+Then
+2→I
+ClrHome
+Goto 11
+Else
+ClrHome
+Goto I
+Lbl I
+If Y>X
+Then
+While getKey=0
+Output(2,4,"-YOU LOST-")
+Output(2,4,"-YOU LOST-")
+Output(2,4,"-YOU LOST-")
+Output(2,4,"-YOU LOST-")
+Output(2,4,"          ")
+Output(2,4,"          ")
+Output(2,4,"          ")
+Output(2,4,"          ")
+Output(3,4,"YOUR CARDS")
+Output(4,8,X)
+Output(5,1,"COMPUTERS  CARDS")
+Output(6,8,Y)
+End
+ClrHome
+Z-W→Z
+0→X
+Goto B
+Else
+If Y<X
+Then
+While getKey=0
+Output(2,4,"-YOU WON-")
+Output(2,4,"-YOU WON-")
+Output(2,4,"-YOU WON-")
+Output(2,4,"-YOU WON-")
+Output(2,4,"         ")
+Output(2,4,"         ")
+Output(2,4,"         ")
+Output(2,4,"         ")
+Output(3,4,"YOUR CARDS")
+Output(4,8,X)
+Output(5,1,"COMPUTERS  CARDS")
+Output(6,8,Y)
+End
+ClrHome
+0→X
+Z+W→Z
+Goto B
+Else
+If X=Y
+Then
+While getKey=0
+Output(2,7,"-TIE-")
+Output(2,7,"-TIE-")
+Output(2,7,"-TIE-")
+Output(2,7,"-TIE-")
+Output(2,7,"     ")
+Output(2,7,"     ")
+Output(2,7,"     ")
+Output(2,7,"     ")
+Output(3,4,"YOUR CARDS")
+Output(4,8,X)
+Output(5,1,"COMPUTERS  CARDS")
+Output(6,8,Y)
+End
+ClrHome
+0→X
+Goto B
+Stop
+HELLO
